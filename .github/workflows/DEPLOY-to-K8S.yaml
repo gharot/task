@@ -20,6 +20,7 @@ jobs:
 
     - name: import gpg secret key
       run: |
+        cat /gpg_key/private.key
         gpg --import --batch /gpg_key/private.key
 
     - name: checkout main branch
