@@ -17,9 +17,9 @@
 
 ## Other work
 
-- [ ] CI-helper image
-- [ ] Wokrflow - build + push CI-helper image
-- [ ] Workflow - deploy to K8S
+- [x] CI-helper image
+- [x] Wokrflow - build + push CI-helper image
+- [x] Workflow - deploy to K8S
 - [ ] Terraform - s3 Bucket
 - [ ] Terraform - RDS Postgresql
 - [ ] Terraform - edit RDS
