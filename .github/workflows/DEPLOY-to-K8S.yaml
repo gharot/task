@@ -3,14 +3,11 @@ name: Deploy to K8S
 on:
   workflow_dispatch:
 
-env:
-  IMAGE_TAG: 1.0.3
-
 jobs:
   deploy-to-K8S:
     runs-on: self-hosted
     container:
-      image: gharot/ci-helper:${{ env.IMAGE_TAG }}
+      image: gharot/ci-helper:1.0.3
     steps:
     - name: run ci-helper container
       run: |
