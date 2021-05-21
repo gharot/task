@@ -1,3 +1,31 @@
+## Work to do
+
+### Deploy to K8S
+
+- [ ] Cert-manager
+- [ ] External-DNS
+- [x] Ingress-nginx
+- [x] Metrics-server
+- [x] GHA runner/operator
+- [ ] Grafana
+- [ ] Prometheus Operator
+- [ ] Node exporter
+- [ ] Postgresql database
+- [ ] Bookstore app
+- [ ] Backup tool
+- [ ] "S3" bucket for backup
+
+## Other work
+
+- [ ] CI-helper image
+- [ ] Wokrflow - build + push CI-helper image
+- [ ] Workflow - deploy to K8S
+- [ ] Terraform - s3 Bucket
+- [ ] Terraform - RDS Postgresql
+- [ ] Terraform - edit RDS
+
+
+-------------------------------------------------------------------------
 
 ## List of tools and its versions
 
