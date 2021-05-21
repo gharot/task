@@ -23,6 +23,7 @@
 - [ ] Terraform - s3 Bucket
 - [ ] Terraform - RDS Postgresql
 - [ ] Terraform - edit RDS
+- [ ] DNS server
 
 
 -------------------------------------------------------------------------
