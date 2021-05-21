@@ -2,11 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-# github-actions-operator
-  - ../namespaces/github-actions-operator
-  - ./github-actions-operator
-# github-actions-runner
-  - ../namespaces/github-actions-runner
-  - ./github-actions-runner
+# # github-actions-operator
+#   - ../namespaces/github-actions-operator
+#   - ./github-actions-operator
+# # github-actions-runner
+#   - ../namespaces/github-actions-runner
+#   - ./github-actions-runner
+  - ../namespaces/test
 transformers:
   - meta-labels.yaml
