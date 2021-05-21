@@ -10,7 +10,7 @@ jobs:
   deploy-to-K8S:
     runs-on: self-hosted
     container:
-      image: ${{ secret.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
+      image: ${{ secrets.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
     steps:
     - name: run ci-helper container
       run: |
