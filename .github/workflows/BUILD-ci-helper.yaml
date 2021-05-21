@@ -17,8 +17,6 @@ jobs:
   build-ci-helper-image:
     name: build-ci-helper-image
     runs-on: self-hosted
-    env:
-      IMAGE_TAG: ${{ github.event.inputs.tag }}
     permissions:
       packages: write
       contents: read
@@ -35,8 +33,12 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     - name: Build the Docker image
+      env:
+        IMAGE_TAG: ${{ github.event.inputs.tag }}
       run: |  
         docker build ci-helper/ -t $DOCKER_USER/ci-helper:$IMAGE_TAG
     - name: docker push
+      env:
+        IMAGE_TAG: ${{ github.event.inputs.tag }}
       run: |
         docker push gharot/ci-helper:$IMAGE_TAG
