@@ -8,7 +8,7 @@ resources:
 # # github-actions-runner
 #   - ../namespaces/github-actions-runner
 #   - ./github-actions-runner
-  - ../namespaces/test
-  - ./test
+  - ../namespaces/metrics-server
+  - ./metrics-server
 transformers:
   - meta-labels.yaml
