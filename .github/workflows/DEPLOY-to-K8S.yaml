@@ -15,7 +15,7 @@ jobs:
         export GPG_SECRET_KEY="${{ secrets.GPG_SECRET_KEY }}" 
         mkdir -p /kubeconfig
         mkdir -p /gpg_key
-        echo "GPG_SECRET_KEY" > /gpg_key/private.key
+        echo "$GPG_SECRET_KEY" > /gpg_key/private.key
         echo "$KUBECONFIG" > /kubeconfig/config
 
     - name: import gpg secret key
