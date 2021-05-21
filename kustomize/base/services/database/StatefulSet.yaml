@@ -72,13 +72,15 @@ spec:
                   name: database
                   key: POSTGRESQL_PORT_NUMBER
             - name: POSTGRESQL_VOLUME_DIR
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_VOLUME_DIR
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_VOLUME_DIR
             - name: PGDATA
-              configMapKeyRef:
-                  name: database
-                  key: PGDATA
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: PGDATA
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -95,37 +97,45 @@ spec:
                   name: database
                   key: POSTGRES_PASSWORD
             - name: POSTGRESQL_ENABLE_LDAP
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_ENABLE_LDAP
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_ENABLE_LDAP
             - name: POSTGRESQL_ENABLE_TLS
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_ENABLE_TLS
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_ENABLE_TLS
             - name: POSTGRESQL_LOG_HOSTNAME
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_LOG_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_LOG_HOSTNAME
             - name: POSTGRESQL_LOG_CONNECTIONS
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_LOG_CONNECTIONS
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_LOG_CONNECTIONS
             - name: POSTGRESQL_LOG_DISCONNECTIONS
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_LOG_DISCONNECTIONS
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_LOG_DISCONNECTIONS
             - name: POSTGRESQL_PGAUDIT_LOG_CATALOG
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_PGAUDIT_LOG_CATALOG
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_PGAUDIT_LOG_CATALOG
             - name: POSTGRESQL_CLIENT_MIN_MESSAGES
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_CLIENT_MIN_MESSAGES
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_CLIENT_MIN_MESSAGES
             - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
-              configMapKeyRef:
-                  name: database
-                  key: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
+              valueFrom:
+                configMapKeyRef:
+                    name: database
+                    key: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
           ports:
             - name: tcp-postgresql
               containerPort: 5432
