@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: garo-system
+
+resources:
+  - ClusterRole.yaml
+  - ClusterRoleBinding.yaml
+  - CustomResourceDefinition.yaml
+  - Deployment.yaml
+  - Role.yaml
+  - RoleBinding.yaml
+  - Service.yaml
+  - ServiceAccount.yaml
+  - ../../../namespaces/Github-actions/operator
+  - ServiceMonitor.yaml # Monitoring přez prometheus-operatora
+
+

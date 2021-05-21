@@ -1,0 +1,28 @@
+- op: replace
+  path: /spec/minRunners
+  value: 1
+
+- op: replace
+  path: /spec/maxRunners
+  value: 2
+
+- op: replace
+  path: /spec/organization
+  value: AhoyTeam
+
+- op: replace
+  path: /spec/reconciliationPeriod
+  value: 1m
+
+
+- op: replace
+  path: /spec/podTemplateSpec/spec/containers/0/env/5/value
+  value: AhoyTeam
+
+- op: replace
+  path: /spec/podTemplateSpec/spec/containers/1/resources/limits/cpu
+  value: 1000m
+
+- op: replace
+  path: /spec/podTemplateSpec/spec/containers/1/resources/limits/memory
+  value: 1000Mi
