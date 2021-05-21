@@ -8,7 +8,11 @@ resources:
 # # github-actions-runner
 #   - ../namespaces/github-actions-runner
 #   - ./github-actions-runner
+# metrics server
   - ../namespaces/metrics-server
   - ./metrics-server
+# ingress nginx
+  - ../namespaces/ingress-nginx
+  - ./ingress-nginx
 transformers:
   - meta-labels.yaml
