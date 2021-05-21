@@ -17,13 +17,13 @@ jobs:
         mkdir -p /gpg_key
         echo "GPG_SECRET_KEY" > /gpg_key/private.key
         echo "$KUBECONFIG" > /kubeconfig/config
-        
-    - name: checkout main branch
-      uses: actions/checkout@v1
 
     - name: import gpg secret key
       run: |
         gpg --import --batch /gpg_key/private.key
+
+    - name: checkout main branch
+      uses: actions/checkout@v1
 
     - name: Deploy to K8S
       run: |
