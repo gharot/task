@@ -7,7 +7,8 @@ on:
         description: 'New image tag.'
         required: true
 
-
+env:
+  IMAGE_TAG: ${{ github.event.inputs.tag }}
   
 defaults:
   run:
@@ -33,12 +34,8 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     - name: Build the Docker image
-      env:
-        IMAGE_TAG: ${{ github.event.inputs.tag }}
       run: |  
-        docker build ci-helper/ -t $DOCKER_USER/ci-helper:$IMAGE_TAG
+        docker build ci-helper/ -t $DOCKER_USER/ci-helper:${{ env.IMAGE_TAG }}
     - name: docker push
-      env:
-        IMAGE_TAG: ${{ github.event.inputs.tag }}
       run: |
-        docker push gharot/ci-helper:$IMAGE_TAG
+        docker push gharot/ci-helper:${{ env.IMAGE_TAG }}
