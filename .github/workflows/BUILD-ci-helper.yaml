@@ -1,0 +1,42 @@
+name: Docker Image CI 
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'New image tag.'
+        required: true
+
+
+  
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-ci-helper-image:
+    name: build-ci-helper-image
+    runs-on: self-hosted
+    env:
+      IMAGE_TAG: ${{ github.event.inputs.tag }}
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    - name: Build the Docker image
+      run: |  
+        docker build ci-helper/ -t $DOCKER_USER/ci-helper:$IMAGE_TAG
+    - name: docker push
+      run: |
+        docker push gharot/ci-helper:$IMAGE_TAG
