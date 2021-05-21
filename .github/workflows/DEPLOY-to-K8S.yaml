@@ -1,16 +1,17 @@
-name: STAGING - Deploy to K8S
+name: Deploy to K8S
 
 on:
   workflow_dispatch:
 
 env:
   IMAGE_TAG: 1.0.3
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
 
 jobs:
   deploy-to-K8S:
     runs-on: self-hosted
     container:
-      image: ${{secrets.DOCKER_USER}}/ci-helper:${{ env.IMAGE_TAG }}
+      image: ${{ env.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
     steps:
     - name: run ci-helper container
       run: |
