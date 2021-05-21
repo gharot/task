@@ -10,6 +10,8 @@ env:
 jobs:
   deploy-to-K8S:
     runs-on: self-hosted
+    env:
+      DOCKER_USER: ${{secrets.DOCKER_USER}}
     container:
       image: ${{ env.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
     steps:
