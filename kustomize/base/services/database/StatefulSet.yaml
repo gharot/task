@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: my-release-postgresql
+  name: postgresql
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.4.6
@@ -11,7 +11,7 @@ metadata:
   annotations:
   namespace: default
 spec:
-  serviceName: my-release-postgresql-headless
+  serviceName: postgresql-headless
   replicas: 1
   updateStrategy:
     type: RollingUpdate
@@ -22,7 +22,7 @@ spec:
       role: primary
   template:
     metadata:
-      name: my-release-postgresql
+      name: postgresql
       labels:
         app.kubernetes.io/name: postgresql
         helm.sh/chart: postgresql-10.4.6
@@ -50,8 +50,34 @@ spec:
           
       securityContext:
         fsGroup: 1001
+      initContainers:
+        - name: init-chmod-data
+          image: docker.io/bitnami/bitnami-shell:10
+          imagePullPolicy: "Always"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          command:
+            - /bin/sh
+            - -cx
+            - |
+              chown 1001:1001 /bitnami/postgresql
+              mkdir -p /bitnami/postgresql/data
+              chmod 700 /bitnami/postgresql/data
+              find /bitnami/postgresql -mindepth 1 -maxdepth 1 -not -name "conf" -not -name ".snapshot" -not -name "lost+found" | \
+                xargs chown -R 1001:1001
+              chmod -R 777 /dev/shm
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/postgresql
+              subPath: 
+            - name: dshm
+              mountPath: /dev/shm
       containers:
-        - name: my-release-postgresql
+        - name: postgresql
           image: docker.io/bitnami/postgresql:11.12.0-debian-10-r5
           imagePullPolicy: "IfNotPresent"
           resources:
@@ -91,6 +117,11 @@ spec:
                 secretKeyRef:
                   name: database
                   key: POSTGRESQL_DATABASE
+            - name: POSTGRES_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: POSTGRES_POSTGRES_PASSWORD
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
