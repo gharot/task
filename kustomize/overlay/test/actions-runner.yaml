@@ -1,0 +1,9 @@
+apiVersion: goabout.com/v1beta1
+kind: SopsSecretGenerator
+metadata:
+    name: actions-runner
+disableNameSuffixHash: true
+envs:
+    - secret.enc.yaml
+type: Opaque
+
