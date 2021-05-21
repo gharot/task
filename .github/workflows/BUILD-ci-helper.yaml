@@ -37,4 +37,4 @@ jobs:
         docker build ci-helper/ -t ${{ env.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
     - name: docker push
       run: |
-        docker push gharot/ci-helper:${{ env.IMAGE_TAG }}
+        docker push ${{ env.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}

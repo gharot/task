@@ -1,0 +1,36 @@
+name: STAGING - Deploy to K8S
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE_TAG: 1.0.3
+
+jobs:
+  deploy-to-K8S:
+    runs-on: self-hosted
+    container:
+      image: ${{ secret.DOCKER_USER }}/ci-helper:${{ env.IMAGE_TAG }}
+    steps:
+    - name: run ci-helper container
+      run: |
+        export KUBECONFIG="${{ secrets.KUBECONFIG }}" 
+        export GPG_SECRET_KEY="${{ secrets.GPG_SECRET_KEY }}" 
+        mkdir -p /kubeconfig
+        mkdir -p /gpg_key
+        echo "GPG_SECRET_KEY" > /gpg_key/private.key
+        echo "$KUBECONFIG" > /kubeconfig/config
+        
+    - name: checkout main branch
+      uses: actions/checkout@v1
+
+    - name: import gpg secret key
+      run: |
+        gpg --import --batch /gpg_key/private.key
+
+    - name: Deploy to K8S
+      run: |
+        export XDG_CONFIG_HOME=/root/.config
+        cd ./kustomize/overlay
+        kustomize build . --enable-alpha-plugins | kubectl --kubeconfig=/kubeconfig/config apply -f -
+
