@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: github-actions-runner
 
 resources:
-  - ../../../base/services/github-actions/runner
+  - ../../base/services/github-actions/runner
 
 patchesJson6902:
   - target:

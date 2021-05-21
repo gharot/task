@@ -27,10 +27,10 @@
   path: /spec/podTemplateSpec/spec/containers/0/env/6/value
   value: task
 
-- op: replace
-  path: /spec/podTemplateSpec/spec/containers/1/resources/limits/cpu
-  value: 1000m
+# - op: replace
+#   path: /spec/podTemplateSpec/spec/containers/1/resources/limits/cpu
+#   value: 1000m
 
-- op: replace
-  path: /spec/podTemplateSpec/spec/containers/1/resources/limits/memory
-  value: 1000Mi
+# - op: replace
+#   path: /spec/podTemplateSpec/spec/containers/1/resources/limits/memory
+#   value: 1000Mi

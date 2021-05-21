@@ -1,3 +1,0 @@
-creation_rules:
-  - kms: 'arn:aws:kms:eu-west-1:445593111748:key/7fdcdd1e-488e-4198-8180-143489da7bdb'
-    path_regex: \.enc\.yaml$

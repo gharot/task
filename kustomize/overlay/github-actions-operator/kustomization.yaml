@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: github-actions-operator
 
 resources:
-  - ../../../base/services/github-actions/operator
+  - ../../base/services/github-actions/operator
 

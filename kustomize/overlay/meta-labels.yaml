@@ -1,0 +1,10 @@
+---
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: meta-lables
+labels:
+  applift.task: v1.0.0
+fieldSpecs:
+  - path: metadata/labels
+    create: true

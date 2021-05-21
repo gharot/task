@@ -12,7 +12,6 @@ resources:
   - RoleBinding.yaml
   - Service.yaml
   - ServiceAccount.yaml
-  - ../../../namespaces/Github-actions/operator
-  - ServiceMonitor.yaml # Monitoring přez prometheus-operatora
+#  - ServiceMonitor.yaml # Monitoring přez prometheus-operatora
 
 
