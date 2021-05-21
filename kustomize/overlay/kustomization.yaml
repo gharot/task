@@ -9,10 +9,13 @@ resources:
 #   - ../namespaces/github-actions-runner
 #   - ./github-actions-runner
 # metrics server
-  - ../namespaces/metrics-server
-  - ./metrics-server
-# ingress nginx
-  - ../namespaces/ingress-nginx
-  - ./ingress-nginx
+#   - ../namespaces/metrics-server
+#   - ./metrics-server
+# # ingress nginx
+#   - ../namespaces/ingress-nginx
+#   - ./ingress-nginx
+# database
+  - ../namespaces/database
+  - ./database
 transformers:
   - meta-labels.yaml

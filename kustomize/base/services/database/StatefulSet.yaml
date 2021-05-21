@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-release-postgresql
+  labels:
+    app.kubernetes.io/name: postgresql
+    helm.sh/chart: postgresql-10.4.6
+    app.kubernetes.io/instance: my-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: primary
+  annotations:
+  namespace: default
+spec:
+  serviceName: my-release-postgresql-headless
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/instance: my-release
+      role: primary
+  template:
+    metadata:
+      name: my-release-postgresql
+      labels:
+        app.kubernetes.io/name: postgresql
+        helm.sh/chart: postgresql-10.4.6
+        app.kubernetes.io/instance: my-release
+        app.kubernetes.io/managed-by: Helm
+        role: primary
+        app.kubernetes.io/component: primary
+    spec:      
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: postgresql
+                    app.kubernetes.io/instance: my-release
+                    app.kubernetes.io/component: primary
+                namespaces:
+                  - "default"
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: my-release-postgresql
+          image: docker.io/bitnami/postgresql:11.12.0-debian-10-r5
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            runAsUser: 1001
+          env:
+            - name: BITNAMI_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: database
+                  key: BITNAMI_DEBUG
+            - name: POSTGRESQL_PORT_NUMBER
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: POSTGRESQL_PORT_NUMBER
+            - name: POSTGRESQL_VOLUME_DIR
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_VOLUME_DIR
+            - name: PGDATA
+              configMapKeyRef:
+                  name: database
+                  key: PGDATA
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: POSTGRES_USER
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: POSTGRESQL_DATABASE
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRESQL_ENABLE_LDAP
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_ENABLE_LDAP
+            - name: POSTGRESQL_ENABLE_TLS
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_ENABLE_TLS
+            - name: POSTGRESQL_LOG_HOSTNAME
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_LOG_HOSTNAME
+            - name: POSTGRESQL_LOG_CONNECTIONS
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_LOG_CONNECTIONS
+            - name: POSTGRESQL_LOG_DISCONNECTIONS
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_LOG_DISCONNECTIONS
+            - name: POSTGRESQL_PGAUDIT_LOG_CATALOG
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_PGAUDIT_LOG_CATALOG
+            - name: POSTGRESQL_CLIENT_MIN_MESSAGES
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_CLIENT_MIN_MESSAGES
+            - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
+              configMapKeyRef:
+                  name: database
+                  key: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
+          ports:
+            - name: tcp-postgresql
+              containerPort: 5432
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - -e
+                - |
+                  exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+                  [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+            - name: data
+              mountPath: /bitnami/postgresql
+              subPath: 
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: manual
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
