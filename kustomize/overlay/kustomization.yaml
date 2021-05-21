@@ -9,5 +9,6 @@ resources:
 #   - ../namespaces/github-actions-runner
 #   - ./github-actions-runner
   - ../namespaces/test
+  - ./test
 transformers:
   - meta-labels.yaml
