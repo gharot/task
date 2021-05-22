@@ -14,7 +14,7 @@
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app
 - [ ] Backup tool
-- [ ] "S3" bucket for backup
+- [ ] Minio
 
 ## Other work
 
