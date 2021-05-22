@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minio
+data:
+  BITNAMI_DEBUG: "false"
+  MINIO_FORCE_NEW_KEYS: "no"
+  PGDATA: "/bitnami/postgresql/data"
+  MINIO_BROWSER: "on"
+  MINIO_PROMETHEUS_AUTH_TYPE: "public"

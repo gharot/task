@@ -14,7 +14,7 @@
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app
 - [ ] Backup tool
-- [ ] Minio
+- [x] Minio
 
 ## Other work
 

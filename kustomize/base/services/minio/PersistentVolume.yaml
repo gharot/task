@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: minio-pv-volume
+  labels:
+    type: local
+    app.kubernetes.io/name: minio
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 9Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"

@@ -17,8 +17,11 @@ resources:
 # # database
 #   - ../namespaces/database
 #   - ./database
-# bookstore
-  - ../namespaces/bookstore
-  - ./bookstore
+# # bookstore
+#   - ../namespaces/bookstore
+#   - ./bookstore
+# minio
+  - ../namespaces/minio
+  - ./minio
 transformers:
   - meta-labels.yaml

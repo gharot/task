@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  namespace: default
+  labels:
+    app.kubernetes.io/name: minio
+    helm.sh/chart: minio-6.7.12
+    app.kubernetes.io/managed-by: Helm
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: minio
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: minio
+        helm.sh/chart: minio-6.7.12
+        app.kubernetes.io/managed-by: Helm
+      annotations:
+        checksum/credentials-secret: 8cc4a25e215addbce79b54d6623da920d6575cba8b58a380676200ed4fb73ca7
+    spec:
+      
+      serviceAccountName: minio
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: minio
+                namespaces:
+                  - "default"
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      initContainers:
+        - name: volume-permissions
+          image: docker.io/bitnami/bitnami-shell:10
+          imagePullPolicy: "Always"
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              chown -R 1001:1001 /data
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      containers:
+        - name: minio
+          image: docker.io/bitnami/minio:2021.5.20-debian-10-r0
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsUser: 1001
+          env:
+            - name: BITNAMI_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: minio
+                  key: BITNAMI_DEBUG
+            - name: MINIO_FORCE_NEW_KEYS
+              valueFrom:
+                configMapKeyRef:
+                  name: minio
+                  key: MINIO_FORCE_NEW_KEYS
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio
+                  key: MINIO_ACCESS_KEY
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio
+                  key: MINIO_SECRET_KEY
+            - name: MINIO_BROWSER
+              valueFrom:
+                configMapKeyRef:
+                  name: minio
+                  key: MINIO_BROWSER
+            - name: MINIO_PROMETHEUS_AUTH_TYPE
+              valueFrom:
+                configMapKeyRef:
+                    name: minio
+                    key: MINIO_PROMETHEUS_AUTH_TYPE
+          envFrom:
+          ports:
+            - name: minio
+              containerPort: 9000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: minio
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            tcpSocket:
+              port: minio
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: minio
