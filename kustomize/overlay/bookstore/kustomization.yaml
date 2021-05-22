@@ -5,6 +5,10 @@ namespace: bookstore
 
 resources:
 - ../../base/services/bookstore
+#- ./bootstrapper
+
+# Při zpuštění, by se automticky vytvořila v databázi nová templata s názvem bookstore, která by patřila nově vygenerovanému uživateli s jménem: bookstore_user. Zároven by se nainstalovaly všechyn extensiony uvedené v configmape
+#Veškeré údaje, tj. uživatel, jmeno db, heslo by se ulozilo do vygenerovaných configmap/secretů, které by byli k dispozici aplikaci (kdyby je měla nadefinované) 
 
 generators:
 - SopsSecretGenerator.yaml

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-database
+data:
+  host: postgresql.database.svc
+  port: "5432"
+  database: bookstore-db
+  user: bookstore-user
+  extensions: ""
+  tenant_namespace: bookstore

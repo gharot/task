@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: catalog-bootstrapper
+spec:
+  ttlSecondsAfterFinished: 600
+  template:
+    metadata:
+      labels:
+    spec:
+      automountServiceAccountToken: true
+      serviceAccountName: tenant-config-bootstrapper
+      restartPolicy: OnFailure
+      containers:
+      - image: gharot/bootstraper:1.0.8
+        name: catalog-bootstrapper
+        command:
+        - sh
+        args:
+        - ./opt/bootstrap.sh
+        env:
+        - name: TENANT_NAMESPACE
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-database
+              key: tenant_namespace
+        - name: PGHOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-database
+              key: host
+        - name: PGPORT
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-database
+              key: port
+        - name: PGDATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-database
+              key: database
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-admin
+              key: db_user
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-admin
+              key: db_pass
+        securityContext:
+            runAsUser: 999
