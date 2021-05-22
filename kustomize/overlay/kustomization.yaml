@@ -20,8 +20,11 @@ resources:
 # # bookstore
 #   - ../namespaces/bookstore
 #   - ./bookstore
-# minio
-  - ../namespaces/minio
-  - ./minio
+# # minio
+#   - ../namespaces/minio
+#   - ./minio
+# monitoring
+  - ../namespaces/monitoring
+  - ./monitoring
 transformers:
   - meta-labels.yaml

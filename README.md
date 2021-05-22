@@ -7,9 +7,10 @@
 - [x] Ingress-nginx
 - [x] Metrics-server
 - [x] GHA runner/operator
-- [ ] Grafana
-- [ ] Prometheus Operator
-- [ ] Node exporter
+- [x] Grafana
+- [x] Prometheus Operator
+- [x] Node exporter
+- [ ] Postgresql exporter
 - [x] Postgresql database
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app

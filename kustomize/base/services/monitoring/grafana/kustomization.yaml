@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ConfigMap-dashboardSources.yaml
+- ConfigMapList-dashboards.yaml
+- Secret-datasources.yaml
+- Service.yaml
+- Deployment.yaml
+- ServiceAccount.yaml
+- ServiceMonitor.yaml
