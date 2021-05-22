@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore
+  labels:
+    helm.sh/chart: bookstore-0.1.0
+    app.kubernetes.io/name: bookstore
+    app.kubernetes.io/instance: bookstore
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bookstore
+      app.kubernetes.io/instance: bookstore
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bookstore
+        app.kubernetes.io/instance: bookstore
+    spec:
+      serviceAccountName: bookstore
+      securityContext:
+        {}
+      containers:
+        - name: bookstore
+          securityContext:
+            {}
+          image: "seyhello/bookstore:latest"
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: bookstore
+                  key: DATABASE_URL
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          resources:
+            {}

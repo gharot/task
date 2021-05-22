@@ -14,8 +14,11 @@ resources:
 # # ingress nginx
 #   - ../namespaces/ingress-nginx
 #   - ./ingress-nginx
-# database
-  - ../namespaces/database
-  - ./database
+# # database
+#   - ../namespaces/database
+#   - ./database
+# bookstore
+  - ../namespaces/bookstore
+  - ./bookstore
 transformers:
   - meta-labels.yaml

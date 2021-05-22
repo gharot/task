@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: bookstore
 
 resources:
-- ../../base/services/bookstore
+  - Pod.yaml
+  - ServiceAccount.yaml
+  - Service.yaml
+  - Deployment.yaml
 
-generators:
-- SopsSecretGenerator.yaml
