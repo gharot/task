@@ -7,3 +7,8 @@ kind: Kustomization
 # /base/services/monitoring/prometheus/RoleBinding.yaml
 resources:
 - ../../base/services/monitoring
+- ConfigMap.yaml
+- additional-scrape-configs.yaml
+
+generators:
+- SopsSecretGenerator.yaml

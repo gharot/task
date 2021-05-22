@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: prometheus-postgres-exporter
+    chart: prometheus-postgres-exporter-2.3.0
+    heritage: Helm
+    release: prometheus-postgres-exporter
+  name: prometheus-postgres-exporter
+  namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: prometheus-postgres-exporter
+subjects:
+- kind: ServiceAccount
+  name: prometheus-postgres-exporter
+  namespace: monitoring

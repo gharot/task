@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: prometheus-postgres-exporter
+    chart: prometheus-postgres-exporter-2.3.0
+    heritage: Helm
+    release: prometheus-postgres-exporter
+  name: prometheus-postgres-exporter
+  namespace: monitoring
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - prometheus-postgres-exporter
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

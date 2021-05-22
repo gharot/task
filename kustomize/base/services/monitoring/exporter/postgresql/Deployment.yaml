@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheus-postgres-exporter
+    chart: prometheus-postgres-exporter-2.3.0
+    heritage: Helm
+    release: prometheus-postgres-exporter
+  name: prometheus-postgres-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-postgres-exporter
+      release: prometheus-postgres-exporter
+  template:
+    metadata:
+      annotations:
+        checksum/config: ed6518116e3550cfe851aada4013c03732825d10dc0524424790fc1303b504b0
+      labels:
+        app: prometheus-postgres-exporter
+        release: prometheus-postgres-exporter
+    spec:
+      containers:
+      - args:
+        - --extend.query-path=/etc/config.yaml
+        env:
+        - name: DATA_SOURCE_URI
+          valueFrom:
+            configMapKeyRef:
+              name: database
+              key: DATA_SOURCE_URI
+        - name: DATA_SOURCE_USER
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: DATA_SOURCE_USER
+        - name: DATA_SOURCE_PASS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: DATA_SOURCE_PASS
+        image: quay.io/prometheuscommunity/postgres-exporter:v0.9.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+        name: prometheus-postgres-exporter
+        ports:
+        - containerPort: 9187
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+        resources: {}
+        volumeMounts:
+        - mountPath: /etc/config.yaml
+          name: queries
+          subPath: config.yaml
+      securityContext: {}
+      serviceAccountName: prometheus-postgres-exporter
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: prometheus-postgres-exporter
+        name: queries

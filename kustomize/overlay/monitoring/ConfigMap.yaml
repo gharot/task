@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database
+  namespace: monitoring
+data:
+  DATA_SOURCE_URI: "postgresql.database.svc:5432?sslmode=disable"

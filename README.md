@@ -10,7 +10,7 @@
 - [x] Grafana
 - [x] Prometheus Operator
 - [x] Node exporter
-- [ ] Postgresql exporter
+- [x] Postgresql exporter
 - [x] Postgresql database
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app
