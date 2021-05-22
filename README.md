@@ -12,6 +12,7 @@
 - [x] Node exporter
 - [x] Postgresql exporter
 - [x] Postgresql database
+- [x] Bootstrapper example
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app
 - [ ] Backup tool
@@ -20,6 +21,7 @@
 ## Other work
 
 - [x] CI-helper image
+- [x] Bootstrapper image
 - [x] Wokrflow - build + push CI-helper image
 - [x] Workflow - deploy to K8S
 - [ ] Terraform - s3 Bucket
