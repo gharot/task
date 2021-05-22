@@ -15,6 +15,8 @@
 - [x] Bootstrapper example
 - [x] Bookstore app
 - [ ] Ingress for Bookstore app
+- [ ] Ingress for Grafana
+- [ ] Ingress for Minio
 - [ ] Backup tool
 - [x] Minio
 
