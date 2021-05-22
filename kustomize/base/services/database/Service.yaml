@@ -5,7 +5,6 @@ metadata:
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.4.6
-    app.kubernetes.io/instance: my-release
     app.kubernetes.io/managed-by: Helm
     # Use this annotation in addition to the actual publishNotReadyAddresses
     # field below because the annotation will stop being respected soon but the
@@ -26,7 +25,6 @@ spec:
       targetPort: tcp-postgresql
   selector:
     app.kubernetes.io/name: postgresql
-    app.kubernetes.io/instance: my-release
 ---
 # Source: postgresql/templates/svc.yaml
 apiVersion: v1
@@ -36,7 +34,6 @@ metadata:
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.4.6
-    app.kubernetes.io/instance: my-release
     app.kubernetes.io/managed-by: Helm
   annotations:
   namespace: default
@@ -48,5 +45,4 @@ spec:
       targetPort: tcp-postgresql
   selector:
     app.kubernetes.io/name: postgresql
-    app.kubernetes.io/instance: my-release
     role: primary
