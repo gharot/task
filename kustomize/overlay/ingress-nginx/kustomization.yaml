@@ -5,6 +5,3 @@ namespace: ingress-nginx
 
 resources:
   - ../../base/services/ingress-nginx
-
-# patchesStrategicMerge:
-#   - DeploymentPatch.yaml

@@ -15,5 +15,5 @@ spec:
     - name: wget
       image: busybox
       command: ["/bin/sh", "-c"]
-      args: ['sleep 30', 'wget bookstore:80']
+      args: ['sleep 30', 'wget bookstore:5000']
   restartPolicy: Never

@@ -6,6 +6,7 @@ namespace: minio
 resources:
 - ../../base/services/minio
 - Configmap.yaml
+- Ingress.yaml
 
 generators:
 - SopsSecretGenerator.yaml

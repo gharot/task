@@ -1,9 +1,25 @@
+# Domains
+
+gharot.cz - pouze uvodní nginx  
+bookstore.gharot.cz  
+grafana.gharot.cz  
+minio.gharot.cz  
+
+* add to /etc/hosts
+
+```txt
+143.198.248.188 gharot.cz
+143.198.248.188 bookstore.gharot.cz
+143.198.248.188 grafana.gharot.cz
+143.198.248.188 minio.gharot.cz
+```
+
 ## Work to do
 
 ### Deploy to K8S
 
 - [ ] Cert-manager
-- [ ] Ingress-nginx
+- [x] Ingress-nginx
 - [x] Metrics-server
 - [x] GHA runner/operator
 - [x] Grafana
@@ -13,9 +29,9 @@
 - [x] Postgresql database
 - [x] Bootstrapper example
 - [x] Bookstore app
-- [ ] Ingress for Bookstore app
-- [ ] Ingress for Grafana
-- [ ] Ingress for Minio
+- [x] Ingress for Bookstore app
+- [x] Ingress for Grafana
+- [x] Ingress for Minio
 - [ ] Backup tool
 - [x] Minio
 

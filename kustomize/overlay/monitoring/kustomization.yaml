@@ -9,6 +9,7 @@ resources:
 - ../../base/services/monitoring
 - ConfigMap.yaml
 - additional-scrape-configs.yaml
+- Ingress.yaml
 
 generators:
 - SopsSecretGenerator.yaml
