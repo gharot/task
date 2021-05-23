@@ -3,8 +3,7 @@
 ### Deploy to K8S
 
 - [ ] Cert-manager
-- [ ] External-DNS
-- [x] Ingress-nginx
+- [ ] Ingress-nginx
 - [x] Metrics-server
 - [x] GHA runner/operator
 - [x] Grafana
@@ -29,7 +28,7 @@
 - [ ] Terraform - s3 Bucket
 - [ ] Terraform - RDS Postgresql
 - [ ] Terraform - edit RDS
-- [ ] DNS server
+- [x] DNS server
 
 
 -------------------------------------------------------------------------

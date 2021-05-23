@@ -8,4 +8,5 @@ resources:
   - ServiceAccount.yaml
   - Service.yaml
   - Deployment.yaml
+  - Ingress.yaml
 
