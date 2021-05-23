@@ -41,6 +41,7 @@ minio.gharot.cz
 - [x] Bootstrapper image
 - [x] Wokrflow - build + push CI-helper image
 - [x] Workflow - deploy to K8S
+- [x] Terraform - enable sops
 - [ ] Terraform - s3 Bucket
 - [ ] Terraform - RDS Postgresql
 - [ ] Terraform - edit RDS
