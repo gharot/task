@@ -11,9 +11,9 @@ resources:
 # metrics server
 #   - ../namespaces/metrics-server
 #   - ./metrics-server
-# # ingress nginx
-#   - ../namespaces/ingress-nginx
-#   - ./ingress-nginx
+# ingress nginx
+  # - ../namespaces/ingress-nginx
+  # - ./ingress-nginx
 # # database
 #   - ../namespaces/database
 #   - ./database
@@ -23,8 +23,15 @@ resources:
 # # minio
 #   - ../namespaces/minio
 #   - ./minio
-# monitoring
-  - ../namespaces/monitoring
-  - ./monitoring
+# # monitoring
+#   - ../namespaces/monitoring
+#   - ./monitoring
+# #exterenal-dns
+#   - ../namespaces/external-dns
+#   - ./external-dns
+# test
+  - ./test
+  - ../namespaces/test
+
 transformers:
   - meta-labels.yaml
