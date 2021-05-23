@@ -1,0 +1,9 @@
+.terraform*
+.idea
+.DS_Store
+errored.tfstate
+terraform.tfstate
+terraform.tfstate.backup
+*-terragrunt-generated.tf
+.terragrunt-cache
+.cache
