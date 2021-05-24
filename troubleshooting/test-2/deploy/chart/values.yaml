@@ -1,0 +1,40 @@
+
+image:
+  repository: seyhello/db-test
+  pullPolicy: Always
+  tag: latest
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+
+service:
+  type: ClusterIP
+  port: 5000
+
+ingress:
+  enabled: true
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: replace.me
+      paths: ['/']
+  tls: []
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+
+postgres:
+  db_host: ""
+  db_name: ""
+  db_user: ""
+  db_pass: ""
