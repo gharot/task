@@ -13,7 +13,7 @@
 ## Řešení
 
 * proby jsem z "HTTP probe" přepsal na "Exec proble". Http probe, dle mého nedává u této aplikace nedává žádny smysl.
-* hodnotu u resources.limits.memory jsem nastavil na 1600Mi. Což mi zajistilo dostatek paměti k tomu, aby celý pythonovksý script doběhl.
+* hodnotu u resources.limits.memory jsem nastavil na 1600Mi (Nez jsem resouurcy navýšil, tak jsem si ověřil v grafaně, že mnám dostatek prostředků). Což mi zajistilo dostatek paměti k tomu, aby celý pythonovksý script doběhl.
 
 ```log
 Iteration # 1 of another 256MB of memory tested ...
